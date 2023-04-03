@@ -1,3 +1,5 @@
+taken from https://cschranz.medium.com/set-up-your-own-gpu-based-jupyterlab-e0d45fcacf43
+
 ## start docker without sudo
 sudo usermod -aG docker ${USER}
 su - ${USER}
