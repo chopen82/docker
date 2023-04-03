@@ -1,0 +1,25 @@
+## start docker without sudo
+sudo usermod -aG docker ${USER}
+su - ${USER}
+groups  # check if docker is listed
+sudo usermod -aG docker ${USER}
+docker run hello-world # check if it works without sudo
+
+##install docker compose
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+docker compose version  # check the version
+
+##install nvidia docker
+sudo apt-get update
+sudo systemctl restart docker
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey |   sudo apt-key add -
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list |   sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo reboot
+
+##test
+docker run --gpus all nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04 nvidia-smi
