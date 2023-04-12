@@ -1,0 +1,19 @@
+version:  "3.10"
+
+services:
+  mlapp:
+    container_name: openai-large-all
+    image: chopen82/openai:large-all
+    ports:
+      - "5000:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            #device_ids: ['GPU-fb3bbc86-5166-86b0-ab7e-1e21e0a47c2b']
+            #count: 1
+            capabilities: [compute,utility]
