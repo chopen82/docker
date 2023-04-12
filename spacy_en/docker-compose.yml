@@ -1,0 +1,11 @@
+version:  "3.10"
+
+services:
+  mlapp:
+    container_name: spacy-en
+    image: chopen82/spacy:en
+    ports:
+      - "5002:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
