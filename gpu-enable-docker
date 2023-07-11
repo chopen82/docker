@@ -1,3 +1,7 @@
+#working inatall nvidia
+sudo ubuntu-drivers install --gpgpu nvidia:530
+sudo apt install nvidia-utils-530
+
 taken from https://cschranz.medium.com/set-up-your-own-gpu-based-jupyterlab-e0d45fcacf43
 
 ## start docker without sudo
