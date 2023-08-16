@@ -1,3 +1,15 @@
+#check IOMMU on proxmox
+
+One very important thing to pay attention to is how your system is booting, ie determine the bootloader.
+# efibootmgr -v
+Is it GRUB [...EFI\proxmox\grubx64.efi] or SYSTEMD-BOOT[...EFI\systemd\systemd-bootx64.efi].
+Then use the proper commands to enable PCIe passthrough using this guide from proxmox. Do pay attention to the part regarding GRUB, SYSTEMD-BOOT etc. as some of them differ a bit.
+Once done and rebooted pcie_acs_override=downstream or pcie_acs_override=downstream, multifunction can be added to the bootloader.
+I have been modifying the the GRUB bootloader and IOMMU groups never separated. Then I noticed my bootloader was using SYSTEMD-BOOT and not GRUB. After making the proper changes voila, all devices are now on their own separate IOMMU groups now.
+Hope this helps someone who's struggling to get this to work.
+
+
+
 #working inatall nvidia
 sudo ubuntu-drivers install --gpgpu nvidia:530
 sudo apt install nvidia-utils-530
